@@ -49,6 +49,6 @@ public class Stream {
         System.out.println(topology.describe());
         final KafkaStreams streams = new KafkaStreams(topology, props);
         // Look at Confluent & Kafka for this part. It involves KafkaStreams.start()
-        streams.start()
+        streams.start();
     }
 }

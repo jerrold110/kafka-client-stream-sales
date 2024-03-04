@@ -20,6 +20,6 @@ def write_to_csv(data, filename):
 
 if __name__ == "__main__":
     num_records = 1000
-    random.seed(1)
+    random.seed(2)
     sales_data = generate_sales_data(num_records)
     write_to_csv(sales_data, 'sales_data.csv')

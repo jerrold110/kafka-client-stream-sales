@@ -9,10 +9,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Producer {
+public class Producer2 {
     public static void main(String[] args) {
         String bootstrapServers = "localhost:9092";
         String filepath = "src/main/java/myapps/data/sales_data.csv";
+        boolean skipHeader = true;
 
         final String INPUT_TOPIC = "topic-input";
 
@@ -27,20 +28,21 @@ public class Producer {
             KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
             String line;
             while ((line = br.readLine()) != null) {
+                if (skipHeader) {
+                    skipHeader = false;
+                    continue;
+                }
                 String[] fields = line.split(",");
                 String key = fields[0];
                 String value = line;
                 ProducerRecord<String, String> record_new = new ProducerRecord<>(INPUT_TOPIC, key, value);
-                System.out.println(key + " " + value);
+                //System.out.println(key + " " + value);
                 producer.send(record_new);
                 Thread.sleep(100);
             }
         } 
         catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }
-        finally {
-            producer.close();
         }
         //System.out.println("WD = " + System.getProperty("user.dir"));
     }
