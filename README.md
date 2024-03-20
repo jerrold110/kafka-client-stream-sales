@@ -8,3 +8,6 @@ Multiple producers
 -> Stream processor (Kstream -> Ktable)
 -> Kafka output-topic
 -> Consumer (Prints the state of the ktable in realtime)
+
+### Project management
+Maven is used at the Java build tool. The Java kafka dependencies are managed in the `pom.xml` file under the <dependencies> tag. Kafka only seems to work with Java 1.8, so 1.8 is specified in the pom file.
