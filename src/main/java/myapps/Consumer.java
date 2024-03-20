@@ -23,13 +23,13 @@ public class Consumer {
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
 
         KafkaConsumer<String, Long> consumer = new KafkaConsumer<>(properties);
-        // Subscribes the consumer to 1 or more topics
         consumer.subscribe(Arrays.asList("topic-output"));
 
         while (true) {
             // This is a method provided by the KafkaConsumer class to retrieve records (messages) from Kafka topics
             // the maximum time to wait for records if none are available in the consumer's internal buffer
-            ConsumerRecords<String, Long> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<String, Long> records = consumer.poll(Duration.ofMillis(1000));
+            
             for (ConsumerRecord<String, Long> record : records) {
                 System.out.printf("Received message: offset = %d, key = %s, value = %s%n",
                     record.offset(), record.key(), record.value());
