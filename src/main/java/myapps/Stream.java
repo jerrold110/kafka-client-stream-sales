@@ -45,7 +45,13 @@ public class Stream {
         // .toStream()
         // .to(outputTopic, Produced.with(Serdes.String(), Serdes.Long()));
 
-        KTable<String, Long> eventCounts = eventStream.mapValues(value -> value.split(",")[1]).groupByKey().count();
+        KTable<String, Long> eventCounts = eventStream.mapValues(value -> value.split(",")[1])
+        .groupByKey()
+        .aggregate(
+                    () -> 0L,
+                    (key, value, aggregate) -> aggregate + Long.parseLong(value),
+                    Materialized.with(Serdes.String(), Serdes.Long())
+                );
 
         eventCounts.toStream().to("topic-output", Produced.with(Serdes.String(), Serdes.Long()));
 

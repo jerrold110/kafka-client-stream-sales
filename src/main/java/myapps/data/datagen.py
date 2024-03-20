@@ -6,7 +6,7 @@ def generate_sales_data(num_records):
     fake = Faker()
     sales_data = []
     for _ in range(num_records):
-        product_id = fake.random_int(min=1, max=1000)
+        product_id = fake.random_int(min=1, max=100)
         quantity = fake.random_int(min=1, max=100)
         price = round(random.uniform(10, 1000), 2)
         sales_data.append([product_id, quantity, price])
