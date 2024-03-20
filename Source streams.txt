@@ -1,6 +1,5 @@
-input topics
 -> KStream
-AN abstraction of records flowing through the topics
+An abstraction of records flowing through the topics
 -> KTable
 Topic is interpreted as a changelong stream, records with the same key are interpreted as UPSERT
 
